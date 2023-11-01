@@ -78,7 +78,6 @@ class MortgageCalculator {
             case 30:
                 return 5;
             default:
-                console.log("Mortgage duration not allowed");
                 return undefined;
         }
     };
