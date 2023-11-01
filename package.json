@@ -1,0 +1,23 @@
+{
+  "name": "hypotheektooljs",
+  "version": "1.0.0",
+  "description": "Tool made for testing class",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "jest --config=jest.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/404Luuk/HypotheekToolJS.git"
+  },
+  "author": "404Luuk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/404Luuk/HypotheekToolJS/issues"
+  },
+  "homepage": "https://github.com/404Luuk/HypotheekToolJS#readme",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
