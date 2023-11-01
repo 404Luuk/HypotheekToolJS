@@ -10,7 +10,7 @@ class MortgageCalculator {
 
     // Constructor to fill fields with calculated values
     constructor(MortgageDuration, postcode, people = []) {
-        this.checkPostcode(postcode);
+        !this.checkPostcode(postcode) ?? process.exit(1);
 
         this.mortgageDuration = MortgageDuration;
         people.forEach((person) => this.addPerson(person));
@@ -33,7 +33,10 @@ class MortgageCalculator {
     calculateTotalYearlyIncome = () => {
         let totalYearlyIncome = 0;
         this.people.forEach(
-            (person) => (totalYearlyIncome += person.yearlyIncome)
+            //check if yearlyIncome is a number
+            (person) =>
+                !isNaN(person.yearlyIncome) &&
+                (totalYearlyIncome += person.yearlyIncome)
         );
         return totalYearlyIncome;
     };
@@ -42,18 +45,23 @@ class MortgageCalculator {
     checkStudentDebt = () => {
         let studentdebt = false;
         this.people.forEach((person) => {
-            person.studentDebt ?? (studentdebt = true);
+            //check if studentDebt is a boolean
+            typeof person.studentDebt === "boolean" &&
+                (studentdebt = studentdebt || person.studentDebt);
         });
 
         return studentdebt;
     };
 
-    // Check postcode and exit if not allowed
+    // Check postcode
     checkPostcode = (postcode) => {
+        // check if postcode is number
+        isNaN(postcode) ?? false;
+
         if (this.forbiddenPostcodes.includes(postcode)) {
-            console.log("Postcode not allowed");
-            process.exit(1);
+            return false;
         }
+        return true;
     };
 
     // Check mortgage duration and return interest rate
@@ -71,7 +79,7 @@ class MortgageCalculator {
                 return 5;
             default:
                 console.log("Mortgage duration not allowed");
-                break;
+                return undefined;
         }
     };
 
